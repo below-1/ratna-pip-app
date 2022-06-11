@@ -1,13 +1,24 @@
 <script lang="ts">
-  export let style: string = 'none';
+  export let outline = false;
   export let disabled: any = null;
   export let color = '';
   export let size = 'base';
   export let path = '';
   export let loading = false;
+  
+
+  $: style = outline ? 'outlined' : 'default';
+  $: cls = `btn ${color} ${style} ${size}`;
 </script>
 
 <style lang="postcss">
+  .btn {
+    @apply flex items-center justify-center;
+  }
+  
+  .btn.base {
+    @apply text-base;
+  }
   .btn.xl {
     @apply text-xl;
   }
@@ -22,8 +33,12 @@
     @apply bg-secondary text-white shadow-secondary;
   }
 
-  .btn.primary {
-    @apply bg-blue-600 text-white px-3 py-2 rounded uppercase font-semibold
+  .btn.primary.default {
+    @apply bg-blue-600 text-white px-3 py-2 rounded uppercase font-semibold;
+  }
+
+  .btn.primary.outlined {
+    @apply px-3 py-2 rounded uppercase font-semibold border border-blue-600;
   }
 
   .btn.disabled {
@@ -34,12 +49,7 @@
 {#if !path}
   <button
     on:click
-    class="btn flex items-center"
-    class:secondary={color == 'secondary'}
-    class:primary={color == 'primary'}
-    class:lg={size == 'lg'}
-    class:sm={size == 'sm'}
-    class:xl={size == 'xl'}
+    class={cls}
     class:disabled={disabled || loading}
   >
     {#if loading}
@@ -56,6 +66,7 @@
     class="btn"
     class:secondary={color == 'secondary'}
     class:primary={color == 'primary'}
+    class:outline={style == 'outline'}
     class:lg={size == 'lg'}
     class:sm={size == 'sm'}
     class:xl={size == 'xl'}

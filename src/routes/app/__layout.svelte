@@ -3,6 +3,7 @@
   import { layout, type LayoutStore } from './_layout';
   import Navigation from './_navigation.svelte';
   import Footer from '$lib/Footer.svelte';
+  import NotifcationContext from './_notification-context.svelte';
 
   setContext<LayoutStore>('layout', layout);
 
@@ -22,6 +23,8 @@
 
 <Navigation/>
 <div class="main-container flex flex-col">
-  <slot></slot>
+  <NotifcationContext>
+    <slot></slot>
+  </NotifcationContext>
   <Footer></Footer>
 </div>

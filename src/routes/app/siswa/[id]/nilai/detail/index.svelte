@@ -1,10 +1,23 @@
 <script lang='ts'>
+  import { onMount, getContext } from 'svelte';
   import { page } from '$app/stores';
-  import type { Nilai } from '$src/types';
+  import type { Nilai, Notify } from '$src/types';
   import Button from '$lib/Button.svelte'
   import NilaiForm from '../_nilai-form.svelte';
 
-  export let item: Nilai;
+  export let item: Nilai = {
+    matematika: 0,
+    ipa: 0,
+    ips: 0,
+    bindo: 0,
+    bing: 0,
+    penjaskes: 0,
+    pancasila: 0,
+    prakarya: 0,
+    agama: 0
+  };
+
+  const notify = getContext<Notify>('notify');
 
   const _tahun = $page.url.searchParams.get('tahun');
   let loading = false;
@@ -25,9 +38,18 @@
       })
       const data = await response.json()
       console.log(data)
+      notify({
+        type: 'positive',
+        timeout: 3000,
+        message: 'sukses menyimpan nilai'
+      })
     } catch (err) {
       console.log(err);
-      alert('gagal menyimpan data');
+      notify({
+        type: 'negative',
+        timeout: 3000,
+        message: 'gagal menyimpan nilai'
+      })
     } finally {
       loading = false;
     }

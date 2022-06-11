@@ -55,23 +55,11 @@ export async function get(event: RequestEvent) {
         and tahun_ajaran = ${tahun}
         and semester = ${semester}
   `;
-  let item: Nilai = {
-    matematika: 0,
-    ipa: 0,
-    ips: 0,
-    bindo: 0,
-    bing: 0,
-    penjaskes: 0,
-    pancasila: 0,
-    prakarya: 0,
-    agama: 0
-  }
-  if (result && result.length > 0) {
-    item = result[0]
-  }
+  const item = result && result.length > 0
+    ? result[0]
+    : null;
+  const body = item ? { item } : {};
   return{
-    body: {
-      item
-    }
+    body
   }
 }
