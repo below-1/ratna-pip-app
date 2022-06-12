@@ -3,6 +3,7 @@
   import { fade } from 'svelte/transition';
   import { browser } from '$app/env';
   import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
   import Filter from './_filter.svelte';
   import Button from '$lib/Button.svelte';
   import EmptyNilaiForm from './_empty-nilai-form.svelte';
@@ -11,8 +12,10 @@
 
   const siswa = getContext<Siswa>('siswa');
 
-  let tahun = 2022;
-  let semester = 1;
+  const _tahun = $page.url.searchParams.get('tahun');
+  const _semester = $page.url.searchParams.get('semester');
+  let tahun = _tahun ? parseInt(_tahun) : 2022;
+  let semester = _semester ? parseInt(_semester) : 1;
   let loading = false;
   let nilai: NilaiDB | null = null;
 
