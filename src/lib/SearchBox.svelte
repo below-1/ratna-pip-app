@@ -23,6 +23,7 @@
     type="text"
     placeholder={placeholder}
     class="border-none outline-none bg-transparent flex-grow px-4"
+    bind:value={keyword}
   />
   <div style="font-size: 1.8rem;">
     <Icon icon="mdi:search" />

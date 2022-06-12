@@ -9,10 +9,16 @@
   let loading = false;
   let keyword = '';
 
+  $: debouncedLoadSiswa(keyword);
+
   async function loadSiswa(keyword: string) {
     loading = true;
+    let url = '/app/siswa';
+    let searchParams = new URLSearchParams();
+    searchParams.set('keyword', keyword);
+    url += '?' + searchParams;
     try {
-      const response = await fetch(`/app/siswa`, {
+      const response = await fetch(url, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -27,6 +33,8 @@
       loading = false;
     }
   }
+
+  const debouncedLoadSiswa = debounce(loadSiswa, 500);
 
   function getLastItem() {
     if (items.length == 0) {
