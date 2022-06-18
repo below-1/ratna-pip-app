@@ -1,6 +1,6 @@
 <script lang="ts">
   import { getContext } from 'svelte';
-  import type { Siswa } from '../types';
+  import type { Siswa } from '$src/types';
   import Icon from '@iconify/svelte';
 
   const siswa = getContext<Siswa>('siswa');
