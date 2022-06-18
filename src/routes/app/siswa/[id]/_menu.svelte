@@ -15,6 +15,11 @@
       label: 'Biodata', 
       path: `/app/siswa/${siswa.id}/biodata`,
       icon: 'clarity:form-line'
+    },
+    { 
+      label: 'Hapus', 
+      path: `/app/siswa/${siswa.id}/remove`,
+      icon: 'bi:trash-fill'
     }
   ]
 </script>
