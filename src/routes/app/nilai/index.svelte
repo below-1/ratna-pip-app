@@ -4,33 +4,34 @@
   import { goto } from '$app/navigation';
   import PeriodeFilter from '$lib/PeriodeFilter.svelte';
   import SearchBox from '$lib/SearchBox.svelte';
-
-  const _tahun = $page.url.searchParams.get('tahun');
-  const _semester = $page.url.searchParams.get('semester');
+  import debounce from '$lib/debounce';
 
   export let items: any[] = [];
-  export let tahun: number;
-  export let semester: number;
+  export let tahun: number = 2020;
+  export let semester: number = 1;
   export let keyword = '';
+  export let nochange = true;
   let loading = false;
 
-  $: getListNilai(tahun, semester);
-  $: onKeywordChange(keyword);
+  $: getData(tahun, semester, keyword);
 
-  async function getListNilai(tahun: number, semester: number) {
+  async function _getData(tahun: number, semester: number, keyword: string) {
+    if (!browser) {
+      return;
+    }
+    if (nochange) {
+      nochange = false;
+      return;
+    }
     const url = new URL($page.url);
     url.searchParams.set('tahun', '' + tahun);
     url.searchParams.set('semester', '' + semester);
+    url.searchParams.set('keyword', keyword);
+    url.searchParams.delete('nochange');
     goto(url);
   }
 
-  async function onKeywordChange(keyword: string) {
-    const url = new URL($page.url);
-    url.searchParams.set('tahun', '' + tahun);
-    url.searchParams.set('semester', '' + semester);
-    url.searchParams.set('keyword', '' + keyword);
-    goto(url); 
-  }
+  const getData = debounce(_getData, 500);
 </script>
 
 <div class="p-4 flex flex-col gap-y-4">

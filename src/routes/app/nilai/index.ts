@@ -3,16 +3,18 @@ import type { Siswa } from '$src/types';
 import db from "$src/db";
 
 export async function get(event: RequestEvent) {
-  const sql = db();
   let keyword = event.url.searchParams.get('keyword');
   keyword = keyword ? keyword : '';
   let limitRaw = event.url.searchParams.get('limit');
   let limit = limitRaw ? parseInt(limitRaw) : 10;
+  let nochange = event.url.searchParams.get('nochange');
+  nochange = nochange ? true : false;
   let after = event.url.searchParams.get('after');
   const _tahun = event.url.searchParams.get('tahun');
   const _semester = event.url.searchParams.get('semester');
   const tahun = _tahun ? parseInt(_tahun) : 2020;
   const semester = _semester ? parseInt(_semester) : 1;
+  const sql = db();
 
   const items = await sql<Siswa[]>`
     select 
@@ -45,7 +47,8 @@ export async function get(event: RequestEvent) {
       items,
       keyword,
       tahun,
-      semester
+      semester,
+      nochange
     }
   }
 }

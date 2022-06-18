@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import now from '$lib/now';
   import Field from '$lib/Field.svelte';
   import Number from '$lib/Number.svelte';
@@ -28,6 +29,9 @@
     <Number
       name="tahun_ajaran"
       bind:value={tahun}
+      on:change={(event) => {
+        console.log(event.target.value)
+      }}
       min={2020}
       max={2050}
     />

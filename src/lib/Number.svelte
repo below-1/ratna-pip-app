@@ -17,6 +17,7 @@
   {min}
   {max}
   bind:value={value}
+  on:change
   class="Number px-4 py-2 outline-none bg-gray-100 border-b-2 border-blue-300 focus:bg-gray-50 focus:border-blue-400 w-full"
   class:error={error}
   {name}

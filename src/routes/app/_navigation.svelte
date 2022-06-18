@@ -53,12 +53,12 @@
 {#if $showNavigation}
 <div class="backdrop flex">
   <nav class="sidenav bg-gray-50 w-64 text-gray-800 pt-4 shadow-lg font-semibold flex flex-col items-start">
-    <a class="px-4 py-2" href="/app/siswa">
+    <a class="px-4 py-2" href="/app/siswa?nochange=true">
       Daftar Siswa
     </a>
-    <button class="px-4 py-2">
+    <a class="px-4 py-2" href="/app/nilai?nochange=true">
       Daftar Nilai
-    </button>
+    </a>
     <button class="px-4 py-2">
       Penentuan Siswa Terbaik
     </button>

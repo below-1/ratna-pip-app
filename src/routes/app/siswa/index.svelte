@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { browser } from '$app/env';
   import type { Siswa } from "./types";
   import ItemLoading from "$lib/ItemLoading.svelte";
   import debounce from "$lib/debounce";
@@ -6,12 +7,16 @@
   import SearchBox from '$lib/SearchBox.svelte';
 
   export let items: Siswa[] = [];
+  export let keyword = '';
+  export let nochange = true;
   let loading = false;
-  let keyword = '';
 
   $: debouncedLoadSiswa(keyword);
 
   async function loadSiswa(keyword: string) {
+    if (!browser) {
+      return;
+    }
     loading = true;
     let url = '/app/siswa';
     let searchParams = new URLSearchParams();

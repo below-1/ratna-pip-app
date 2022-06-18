@@ -10,6 +10,8 @@ export async function get(event: RequestEvent): Promise<RequestHandlerOutput> {
   let limitRaw = event.url.searchParams.get('limit');
   let limit = limitRaw ? parseInt(limitRaw) : 10;
   let after = event.url.searchParams.get('after');
+  let nochange: boolean = !!event.url.searchParams.get('nochange');
+  nochange = nochange ? true : false;
   
   const items = await sql<Siswa[]>`
     select * from siswa
@@ -31,7 +33,9 @@ export async function get(event: RequestEvent): Promise<RequestHandlerOutput> {
   });
   return {
     body: {
-      items: withAvatar
+      items: withAvatar,
+      nochange,
+      keyword
     }
   }
 }
