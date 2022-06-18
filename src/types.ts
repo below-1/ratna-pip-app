@@ -17,6 +17,7 @@ export interface Siswa {
   penghasilan_ortu: number;
   tanggungan_ortu: number;
   hafalan_alquran: number;
+  username: string;
 }
 
 export type NotificationType = 'positive' | 'negative';
