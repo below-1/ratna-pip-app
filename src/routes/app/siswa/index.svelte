@@ -11,8 +11,6 @@
   export let nochange = true;
   let loading = false;
 
-  $: debouncedLoadSiswa(keyword);
-
   async function loadSiswa(keyword: string) {
     if (!browser) {
       return;
@@ -80,7 +78,6 @@
   function onKeyUp(event: Event) {
     loadSiswa((event.target as HTMLInputElement).value)
   }
-
   const debouncedKeyUp = debounce(onKeyUp, 1000);
 </script>
 
@@ -101,7 +98,12 @@
   </div>
 
   <div class="mx-4">
-    <SearchBox bind:keyword={keyword} />
+    <SearchBox 
+      bind:keyword={keyword} 
+      on:keyup={event => {
+        debouncedLoadSiswa(event.target.value)
+      }}
+    />
   </div>
 
   <div class="px-4 pt-4 flex flex-col gap-y-4">
