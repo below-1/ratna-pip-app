@@ -59,9 +59,9 @@
     <a class="px-4 py-2" href="/app/nilai?nochange=true">
       Daftar Nilai
     </a>
-    <button class="px-4 py-2">
+    <a class="px-4 py-2" href="/app/compute">
       Penentuan Siswa Terbaik
-    </button>
+    </a>
   </nav>
 </div>
 {/if}

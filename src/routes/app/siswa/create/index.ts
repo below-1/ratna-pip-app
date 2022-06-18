@@ -13,6 +13,9 @@ export const CreateSiswaInputSchema = v.object({
   kelas: v.number().assert(x => x >= 7 && x <= 9, "Kelas invalid"),
   sub_kelas: v.number().assert(x => x >= 1 && x <= 50, "Kelas invalid"),
   nama: v.string(),
+  penghasilan_ortu: v.number(),
+  tanggungan_ortu: v.number(),
+  hafalan_alquran: v.number(),
   jenis_kelamin: v.union(v.literal('Laki - Laki'), v.literal('Perempuan')),
   tanggal_lahir: DateSchema
 });

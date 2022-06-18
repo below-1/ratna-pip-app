@@ -14,6 +14,9 @@ export interface Siswa {
   kelas: number;
   sub_kelas: number;
   tanggal_lahir: string;
+  penghasilan_ortu: number;
+  tanggungan_ortu: number;
+  hafalan_alquran: number;
 }
 
 export type NotificationType = 'positive' | 'negative';

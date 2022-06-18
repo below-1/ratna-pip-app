@@ -11,7 +11,10 @@
   let loading = false;
   let nama: string = 'Jordan Meta';
   let nisn: string = 'foobar';
-  let jenisKelamin = 'Laki - laki';
+  let jenisKelamin = 'Laki - Laki';
+  let penghasilan_ortu: number = 500000;
+  let tanggungan_ortu: number = 1;
+  let hafalan_alquran: number = 0;
   let tanggalLahir: string | null = '2014-02-04';
   let kelas = 7;
   let sub_kelas = 1;
@@ -58,6 +61,9 @@
       nama,
       nisn,
       tanggal_lahir: new Date(tanggalLahir!),
+      hafalan_alquran,
+      penghasilan_ortu,
+      tanggungan_ortu,
       kelas,
       sub_kelas,
       jenis_kelamin: jenisKelamin
@@ -109,6 +115,27 @@
         name="jenis_kelamin"
         options={jenisKelaminOptions}
         bind:value={jenisKelamin}
+      />
+    </Field>
+    <Field label="Penghasilan Orang Tua">
+      <INumber 
+        bind:value={penghasilan_ortu}
+        name="penghasilan_ortu"
+        max={100000000}
+      />
+    </Field>
+    <Field label="Tanggungan Orang Tua">
+      <INumber 
+        bind:value={tanggungan_ortu}
+        name="tanggungan_ortu"
+        max={12}
+      />
+    </Field>
+    <Field label="Hafalan AlQuran">
+      <INumber 
+        bind:value={hafalan_alquran}
+        name="hafalan_alquran"
+        max={30}
       />
     </Field>
     <Field label="Kelas">

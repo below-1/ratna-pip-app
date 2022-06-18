@@ -13,13 +13,18 @@
 
   const notify = getContext<Notify>('notify');
   const siswa = getContext<Siswa>('siswa');
+  console.log(siswa);
+  console.log('siswa');
   let loading = false;
   let nama: string = siswa.nama;
   let nisn: string = siswa.nisn;
   let jenisKelamin = siswa.jenis_kelamin;
+  let penghasilan_ortu = siswa.penghasilan_ortu;
+  let tanggungan_ortu = siswa.tanggungan_ortu;
+  let hafalan_alquran = siswa.hafalan_alquran;
   let tanggalLahir: string | null = siswa.tanggal_lahir;
-  let kelas = siswa.kelas;
-  let sub_kelas = siswa.sub_kelas;
+  let kelas = parseInt(siswa.kelas as any);
+  let sub_kelas = parseInt(siswa.sub_kelas as any);
   const jenisKelaminOptions = [
     { text: 'Laki - Laki', value: 'Laki - Laki' },
     { text: 'Perempuan', value: 'Perempuan' }
@@ -146,6 +151,25 @@
         bind:value={tanggalLahir} 
         error={tanggalLahirError} 
         name="tanggal_lahir" />
+    </Field>
+
+    <Field label="Penghasilan Orang Tua">
+      <INumber 
+        bind:value={penghasilan_ortu}
+        name="penghasilan_ortu"
+      />
+    </Field>
+    <Field label="Tanggungan Orang Tua">
+      <INumber 
+        bind:value={tanggungan_ortu}
+        name="penghasilan_ortu"
+      />
+    </Field>
+    <Field label="Hafalan AlQuran">
+      <INumber 
+        bind:value={hafalan_alquran}
+        name="hafalan_alquran"
+      />
     </Field>
     <Button 
       size="lg" 

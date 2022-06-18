@@ -1,10 +1,11 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, createEventDispatcher } from 'svelte';
   import now from '$lib/now';
   import Field from '$lib/Field.svelte';
   import Number from '$lib/Number.svelte';
   import Select from '$lib/Select.svelte';
 
+  const dispatch = createEventDispatcher();
   const tnow = now();
 
   export let tahun = tnow.getFullYear();
@@ -30,7 +31,11 @@
       name="tahun_ajaran"
       bind:value={tahun}
       on:change={(event) => {
-        console.log(event.target.value)
+        const tahun = parseInt(event.target.value);
+        dispatch('change', {
+          tahun,
+          semester
+        })
       }}
       min={2020}
       max={2050}
@@ -42,6 +47,13 @@
       bind:value={semester}
       options={semesterOptions}
       name="Semester"
+      on:change={(event) => {
+        const semester = parseInt(event.target.value);
+        dispatch('change', {
+          tahun,
+          semester
+        })
+      }}
     ></Select>
   </Field>
 </div>
